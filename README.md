@@ -2,20 +2,17 @@
 
 REST API fyrir fótboltaviðburði byggt með Hono, TypeScript, Prisma og PostgreSQL.
 
+## Live version
+
+Verkefnið er keyrandi hér:
+
+`https://football-events-api.onrender.com`
+
 ## Lýsing
 
-Verkefnið er vefþjónusta fyrir fótboltaviðburði þar sem hægt er að:
+Football Events API er vefþjónusta fyrir fótboltaviðburði. Kerfið leyfir notendum að skoða viðburði, lið, velli og flokka, skrá sig og skrá sig inn, og skrá sig á viðburði. Stjórnendur geta búið til, uppfært og eytt gögnum í kerfinu.
 
-- skoða viðburði
-- skoða lið
-- skoða velli
-- skoða flokka
-- nýskrá notendur
-- skrá inn notendur
-- skrá notendur á viðburði
-- leyfa stjórnendum að búa til, uppfæra og eyða gögnum
-
-Kerfið notar JWT auðkenningu og hlutverkaskiptingu milli almenns notanda og stjórnanda.
+Verkefnið notar JWT auðkenningu, hlutverkaskiptingu milli almenns notanda og stjórnanda, PostgreSQL gagnagrunn og Cloudinary fyrir myndaupphleðslu.
 
 ## Tækni
 
@@ -25,7 +22,10 @@ Kerfið notar JWT auðkenningu og hlutverkaskiptingu milli almenns notanda og st
 - PostgreSQL
 - Neon
 - JWT
+- Cloudinary
 - Vitest
+- ESLint
+- Render
 
 ## GitHub repo
 
@@ -40,10 +40,3 @@ Repo fyrir verkefnið er hér:
 ```bash
 git clone https://github.com/Orrinnn/football-events-api.git
 cd football-events-api
-
-
-## Live version
-
-Verkefnið er keyrandi hér:
-
-`https://football-events-api.onrender.com`
