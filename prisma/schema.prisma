@@ -1,0 +1,93 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  admin
+  user
+}
+
+model User {
+  id            Int            @id @default(autoincrement())
+  username      String         @unique @db.VarChar(50)
+  email         String         @unique @db.VarChar(100)
+  password      String         @db.VarChar(255)
+  role          Role           @default(user)
+  createdAt     DateTime       @default(now())
+  eventsCreated Event[]
+  registrations Registration[]
+}
+
+model Team {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique @db.VarChar(100)
+  shortName   String   @unique @db.VarChar(20)
+  description String?  @db.Text
+  logoUrl     String?  @db.VarChar(255)
+  createdAt   DateTime @default(now())
+  events      Event[]
+}
+
+model Venue {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique @db.VarChar(100)
+  address   String   @db.VarChar(150)
+  city      String   @db.VarChar(100)
+  capacity  Int?
+  imageUrl  String?  @db.VarChar(255)
+  createdAt DateTime @default(now())
+  events    Event[]
+}
+
+model Category {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique @db.VarChar(50)
+  createdAt DateTime @default(now())
+  events    Event[]
+}
+
+model Event {
+  id              Int            @id @default(autoincrement())
+  title           String         @db.VarChar(150)
+  description     String?        @db.Text
+  eventDate       DateTime
+  maxParticipants Int?
+  imageUrl        String?        @db.VarChar(255)
+  isOpen          Boolean        @default(true)
+  createdAt       DateTime       @default(now())
+
+  categoryId      Int
+  venueId         Int
+  teamId          Int
+  createdById     Int
+
+  category      Category       @relation(fields: [categoryId], references: [id])
+  venue         Venue          @relation(fields: [venueId], references: [id])
+  team          Team           @relation(fields: [teamId], references: [id])
+  createdBy     User           @relation(fields: [createdById], references: [id])
+  registrations Registration[]
+
+  @@index([categoryId])
+  @@index([venueId])
+  @@index([teamId])
+  @@index([createdById])
+}
+
+model Registration {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+
+  userId    Int
+  eventId   Int
+
+  user      User     @relation(fields: [userId], references: [id])
+  event     Event    @relation(fields: [eventId], references: [id])
+
+  @@unique([userId, eventId])
+  @@index([userId])
+  @@index([eventId])
+}
