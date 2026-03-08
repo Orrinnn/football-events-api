@@ -5,6 +5,7 @@ import teamsRouter from './routes/teams';
 import venuesRouter from './routes/venues';
 import categoriesRouter from './routes/categories';
 import registrationsRouter from './routes/registrations';
+import uploadRouter from './routes/upload';
 import type { AppBindings } from './types';
 
 export const app = new Hono<AppBindings>();
@@ -50,6 +51,9 @@ app.get('/', (c) => {
         list: 'GET /registrations',
         delete: 'DELETE /registrations/:id',
       },
+      upload: {
+        image: 'POST /upload',
+      },
     },
   });
 });
@@ -60,6 +64,7 @@ app.route('/teams', teamsRouter);
 app.route('/venues', venuesRouter);
 app.route('/categories', categoriesRouter);
 app.route('/', registrationsRouter);
+app.route('/upload', uploadRouter);
 
 app.notFound((c) => {
   return c.json({ error: 'Not found' }, 404);

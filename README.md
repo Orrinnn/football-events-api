@@ -40,3 +40,10 @@ Repo fyrir verkefnið er hér:
 ```bash
 git clone https://github.com/Orrinnn/football-events-api.git
 cd football-events-api
+
+
+## Live version
+
+Verkefnið er keyrandi hér:
+
+`https://football-events-api.onrender.com`
