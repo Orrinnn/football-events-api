@@ -1,8 +1,8 @@
 import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
+import jwt, { JwtPayload } from 'jsonwebtoken';
 import type { JwtUser } from '../types';
 
-const jwtSecret = process.env.JWT_SECRET;
+const jwtSecret: string = process.env.JWT_SECRET || '';
 
 if (!jwtSecret) {
   throw new Error('JWT_SECRET is not set');
@@ -20,11 +20,18 @@ export function generateToken(user: JwtUser) {
   return jwt.sign(user, jwtSecret, { expiresIn: '7d' });
 }
 
+type DecodedJwt = JwtPayload & {
+  id?: number;
+  username?: string;
+  email?: string;
+  role?: 'admin' | 'user';
+};
+
 export function verifyToken(token: string): JwtUser | null {
   try {
-    const decoded = jwt.verify(token, jwtSecret);
+    const decoded = jwt.verify(token, jwtSecret) as string | DecodedJwt;
 
-    if (typeof decoded !== 'object' || decoded === null) {
+    if (typeof decoded === 'string') {
       return null;
     }
 

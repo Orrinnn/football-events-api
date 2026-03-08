@@ -1,21 +1,42 @@
 # Football Events API
 
-REST API for football events built with Hono, TypeScript, Prisma and PostgreSQL.
+REST API fyrir fótboltaviðburði byggt með Hono, TypeScript, Prisma og PostgreSQL.
 
-## Tech stack
+## Lýsing
+
+Verkefnið er vefþjónusta fyrir fótboltaviðburði þar sem hægt er að:
+
+- skoða viðburði
+- skoða lið
+- skoða velli
+- skoða flokka
+- nýskrá notendur
+- skrá inn notendur
+- skrá notendur á viðburði
+- leyfa stjórnendum að búa til, uppfæra og eyða gögnum
+
+Kerfið notar JWT auðkenningu og hlutverkaskiptingu milli almenns notanda og stjórnanda.
+
+## Tækni
 
 - Hono
 - TypeScript
 - Prisma
-- PostgreSQL (Neon)
-- JWT authentication
+- PostgreSQL
+- Neon
+- JWT
 - Vitest
 
-## Setup
+## GitHub repo
+
+Repo fyrir verkefnið er hér:
+
+`https://github.com/Orrinnn/football-events-api`
+
+## Uppsetning
+
+### 1. Clone verkefnið
 
 ```bash
-npm install
-npm run prisma:generate
-npm run prisma:migrate -- --name init
-npm run seed
-npm run dev
+git clone https://github.com/Orrinnn/football-events-api.git
+cd football-events-api
